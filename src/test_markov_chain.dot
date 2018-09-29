@@ -1,5 +1,5 @@
 digraph my_markov_chain {
-		a -> b [label = 0.5];
-		b -> c [label = 1.0];
-		a -> c [label = 0.7];
+		"rain" -> "sunny" [label = 0.5];
+		"hail" -> "snow" [label = 1.0];
+		"rain" -> "hail" [label = 0.7]; /* a comment*/
 }

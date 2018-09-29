@@ -1,6 +1,6 @@
 def parse_dot(dot_text):
     header_dot_text = dot_text[0 : dot_text.find("{")].split()
-    body_dot_text = dot_text[dot_text.find("{") + 1 : dot_text.rfind("}")]
+    body_dot_text = remove_between(dot_text[dot_text.find("{") + 1 : dot_text.rfind("}")], "/*", "*/")
 
     validate_header_dot_text(header_dot_text)
 
@@ -31,12 +31,16 @@ def prev_word(document, curr_index):
 
     WHITESPACE_SYMBOLS = [" ", "\n", "\t"]
 
+    is_string = False
     is_curr_char_whitespace_symbol = False
     for WHITESPACE_SYMBOL in WHITESPACE_SYMBOLS:
         if document[curr_index] == WHITESPACE_SYMBOL:
             is_curr_char_whitespace_symbol = True
-    while is_curr_char_whitespace_symbol:
+    while is_curr_char_whitespace_symbol and not is_string:
         curr_index -= 1
+        if document[curr_index] == "\"" or document[curr_index] == "\'":
+            is_string = True
+            curr_index -= 1
         is_curr_char_whitespace_symbol = False
         for WHITESPACE_SYMBOL in WHITESPACE_SYMBOLS:
             if document[curr_index] == WHITESPACE_SYMBOL:
@@ -46,9 +50,12 @@ def prev_word(document, curr_index):
     for WHITESPACE_SYMBOL in WHITESPACE_SYMBOLS:
         if document[curr_index] == WHITESPACE_SYMBOL:
             is_curr_char_whitespace_symbol = True
-    while not is_curr_char_whitespace_symbol:
+    while (not is_curr_char_whitespace_symbol) or is_string:
         prev_word = document[curr_index] + prev_word
         curr_index -= 1
+        if document[curr_index] == "\"" or document[curr_index] == "\'":
+            is_string = False
+            curr_index -= 1
         is_curr_char_whitespace_symbol = False
         for WHITESPACE_SYMBOL in WHITESPACE_SYMBOLS:
             if document[curr_index] == WHITESPACE_SYMBOL:
@@ -61,24 +68,32 @@ def next_word(document, curr_index):
 
     WHITESPACE_SYMBOLS = [" ", "\n", "\t"]
 
+    is_string = False
     is_curr_char_whitespace_symbol = False
     for WHITESPACE_SYMBOL in WHITESPACE_SYMBOLS:
         if document[curr_index] == WHITESPACE_SYMBOL:
             is_curr_char_whitespace_symbol = True
-    while is_curr_char_whitespace_symbol:
+    while is_curr_char_whitespace_symbol and not is_string:
         curr_index += 1
+        if document[curr_index] == "\"" or document[curr_index] == "\'":
+            is_string = True
+            curr_index += 1
         is_curr_char_whitespace_symbol = False
         for WHITESPACE_SYMBOL in WHITESPACE_SYMBOLS:
             if document[curr_index] == WHITESPACE_SYMBOL:
                 is_curr_char_whitespace_symbol = True
 
+
     is_curr_char_whitespace_symbol = False
     for WHITESPACE_SYMBOL in WHITESPACE_SYMBOLS:
         if document[curr_index] == WHITESPACE_SYMBOL:
             is_curr_char_whitespace_symbol = True
-    while not is_curr_char_whitespace_symbol:
+    while (not is_curr_char_whitespace_symbol) or is_string:
         next_word += document[curr_index]
         curr_index += 1
+        if document[curr_index] == "\"" or document[curr_index] == "\'":
+            is_string = False
+            curr_index += 1
         is_curr_char_whitespace_symbol = False
         for WHITESPACE_SYMBOL in WHITESPACE_SYMBOLS:
             if document[curr_index] == WHITESPACE_SYMBOL:
@@ -130,3 +145,10 @@ def split_by(document, seperators):
             new_tokens.extend(str(token).split(seperator))
         tokens = [x for x in new_tokens if x != '']
     return tokens
+
+def remove_between(document, start_str, end_str):
+    while start_str in document and end_str in document:
+        start_str_index = document.find(start_str)
+        end_str_index = document.find(end_str, start_str_index) + len(end_str) - 1
+        document = document[0 : start_str_index] + document[end_str_index + 1 : len(document)]
+    return document

@@ -40,10 +40,10 @@ markov_chain_code += "\tdef step(self, probability):\n"
 is_first_state = True
 for state_name, edges in states.items():
     if is_first_state:
-        markov_chain_code += "\t\tif self.curr_state == " + state_name + ":\n"
+        markov_chain_code += "\t\tif self.curr_state == \"" + state_name + "\":\n"
         is_first_state = False
     else:
-        markov_chain_code += "\t\telif self.curr_state == " + state_name + ":\n"
+        markov_chain_code += "\t\telif self.curr_state == \"" + state_name + "\":\n"
 
     total_probability = 0
     for edge in edges:
@@ -56,9 +56,24 @@ for state_name, edges in states.items():
             markov_chain_code += "\t\t\tif probability < " + str(edge['transition_probability'] / total_probability) + ":\n"
         else:
             markov_chain_code += "\t\t\telif probability < " + str(edge['transition_probability'] / total_probability) + ":\n"
-        markov_chain_code += "\t\t\t\tself.curr_state = " + edge['destination_state_name'] + "\n"
+        markov_chain_code += "\t\t\t\tself.curr_state = \"" + edge['destination_state_name'] + "\"\n"
 
 markov_chain_code += "\n"
+
+markov_chain_code += "\tdef next(self):\n"
+is_first_state = True
+for state_name, edges in states.items():
+    if is_first_state:
+        markov_chain_code += "\t\tif self.curr_state == \"" + state_name + "\":\n"
+        is_first_state = False
+    else:
+        markov_chain_code += "\t\telif self.curr_state == \"" + state_name + "\":\n"
+    destination_state_names = []
+    for edge in sorted(edges, key = lambda edge: edge['transition_probability']):
+        destination_state_names.append(edge['destination_state_name'])
+    markov_chain_code += "\t\t\treturn " + str(destination_state_names) + "\n"
+markov_chain_code += "\t\telse:\n"
+markov_chain_code += "\t\t\treturn []\n"
 
 # print generated code to new file
 markov_chain_code_file_path = markov_chain_dot_file_path.replace(".dot", ".py")
