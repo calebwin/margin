@@ -42,4 +42,4 @@ class my_markov_chain:
 ```
 
 ## What can I use it for
-Not really sure but I guess it could potentially streamline building hardcoded Markov chain implementations.
+I guess it could potentially streamline building hardcoded Markov chain implementations, but I'm not really sure to be honest.
