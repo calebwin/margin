@@ -1,0 +1,5 @@
+digraph my_markov_chain {
+		a -> b [label = 0.5];
+		b -> c [label = 1.0];
+		a -> c [label = 0.7];
+}
