@@ -49,6 +49,6 @@ my_weather_predictor = my_markov_chain("rainy")
 my_weather_predictor.step()
 ```
 
-## What can I use it for
-I guess you could use it to somehow streamline building hardcoded Markov chain implementations, but...
-I'm not really sure to be honest.
+## Why should I use it
+I mean - it does let you make Markov chains with DOT.
+But other than that, I'm not really sure to be honest.
