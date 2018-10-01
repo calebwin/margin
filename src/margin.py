@@ -75,6 +75,10 @@ for state_name, edges in states.items():
 markov_chain_code += "\t\telse:\n"
 markov_chain_code += "\t\t\treturn []\n"
 
+markov_chain_code += "\n"
+markov_chain_code += "\tdef state(self):\n"
+markov_chain_code += "\t\treturn self.curr_state\n"
+
 # print generated code to new file
 markov_chain_code_file_path = markov_chain_dot_file_path.replace(".dot", ".py")
 markov_chain_code_file = open(markov_chain_code_file_path, 'w')
