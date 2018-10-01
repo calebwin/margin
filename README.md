@@ -51,4 +51,4 @@ my_weather_predictor.step()
 
 ## Why should I use it
 I mean - it does let you make Markov chains with DOT.
-But other than that, I'm not really sure to be honest.
+But other than that, I'm not really sure to be honest :/
