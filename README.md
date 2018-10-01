@@ -47,6 +47,7 @@ And you can use it as follows
 ```
 my_weather_predictor = my_markov_chain("rainy")
 my_weather_predictor.step()
+```
 
 ## What can I use it for
 I guess you could use it to somehow streamline building hardcoded Markov chain implementations, but...
