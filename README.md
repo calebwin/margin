@@ -1,5 +1,5 @@
 ## What it is
-margin is a compiler for Markov chains written in the DOT language to implementations in the Python programming language.
+margin is a compiler for generating Markov chains implementations in the Python programming language from DOT graphs.
 
 ## How to use it
 All you have to do is make a DOT file describing the graph of the desired Markov chain.
