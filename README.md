@@ -17,7 +17,7 @@ margin can then compile the graph to a Python implementation of the Markov Chain
 python margin.py weather_markov_chain.dot
 ```
 
-This will compile to the following Python code.
+The above DOT code will compile to the following Python code.
 ```python
 # weather_markov_chain.py
 class my_markov_chain:
