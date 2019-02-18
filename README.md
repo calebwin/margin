@@ -22,6 +22,6 @@ class my_markov_chain:
 
 And you can use it as follows
 ```python
-my_weather_predictor = my_markov_chain("rainy")
+my_weather_predictor = my_markov_chain("rain")
 my_weather_predictor.step()
 ```
