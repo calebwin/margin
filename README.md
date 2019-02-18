@@ -1,5 +1,5 @@
 # Margin
-Margin is an utterly useuless compiler for Markov chains. You can specify your markov chains as DOT graphs.
+Margin is an utterly useless compiler for Markov chains. You can specify your Markov chains as DOT graphs.
 ```dot
 /* weather_markov_chain.dot */
 digraph my_weather_markov_chain {
